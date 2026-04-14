@@ -6,6 +6,10 @@ function getAll() {
 }
 
 function add(data) {
+    if (!data || !data.country) {
+        return { error: "country required" };
+    }
+
     const item = {
         id: id++,
         country: data.country,

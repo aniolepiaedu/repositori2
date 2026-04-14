@@ -8,10 +8,8 @@ app.use(express.json());
 
 const apiRoutes = require("./api/main");
 
-// 👇 todas las rutas pasan por aquí
 app.use("/api", apiRoutes);
 
-// root
 app.get("/", (req, res) => {
     res.send("Main API Gateway running 🚀");
 });

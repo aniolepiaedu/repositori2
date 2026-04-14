@@ -6,13 +6,21 @@ function getAll() {
 }
 
 function add(data) {
-    const item = { id: id++, ...data };
+    if (!data || !data.name) {
+        return { error: "name required" };
+    }
+
+    const item = {
+        id: id++,
+        name: data.name
+    };
+
     wishlist.push(item);
     return item;
 }
 
 function remove(wishId) {
-    wishlist = wishlist.filter(w => w.id !== wishId);
+    wishlist = wishlist.filter(w => w.id !== Number(wishId));
     return { ok: true };
 }
 

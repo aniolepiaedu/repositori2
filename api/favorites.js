@@ -6,13 +6,21 @@ function getAll() {
 }
 
 function add(data) {
-    const item = { id: id++, ...data };
+    if (!data || !data.name) {
+        return { error: "name required" };
+    }
+
+    const item = {
+        id: id++,
+        name: data.name
+    };
+
     favorites.push(item);
     return item;
 }
 
 function remove(favId) {
-    favorites = favorites.filter(f => f.id !== favId);
+    favorites = favorites.filter(f => f.id !== Number(favId));
     return { ok: true };
 }
 

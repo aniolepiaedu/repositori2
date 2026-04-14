@@ -5,9 +5,8 @@ const favorites = require("./favorites");
 const history = require("./history");
 const wishlist = require("./wishlist");
 
-// =====================
-// FAVORITES
-// =====================
+/* ===================== FAVORITES ===================== */
+
 router.get("/favorites", (req, res) => {
     res.json(favorites.getAll());
 });
@@ -17,14 +16,13 @@ router.post("/favorites", (req, res) => {
     res.status(201).json(item);
 });
 
-router.delete("/favorites", (req, res) => {
-    const result = favorites.remove(Number(req.query.id));
+router.delete("/favorites/:id", (req, res) => {
+    const result = favorites.remove(req.params.id);
     res.json(result);
 });
 
-// =====================
-// HISTORY
-// =====================
+/* ===================== HISTORY ===================== */
+
 router.get("/history", (req, res) => {
     res.json(history.getAll());
 });
@@ -34,9 +32,8 @@ router.post("/history", (req, res) => {
     res.status(201).json(item);
 });
 
-// =====================
-// WISHLIST
-// =====================
+/* ===================== WISHLIST ===================== */
+
 router.get("/wishlist", (req, res) => {
     res.json(wishlist.getAll());
 });
@@ -46,8 +43,8 @@ router.post("/wishlist", (req, res) => {
     res.status(201).json(item);
 });
 
-router.delete("/wishlist", (req, res) => {
-    const result = wishlist.remove(Number(req.query.id));
+router.delete("/wishlist/:id", (req, res) => {
+    const result = wishlist.remove(req.params.id);
     res.json(result);
 });
 
