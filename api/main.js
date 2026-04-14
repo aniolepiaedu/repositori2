@@ -5,6 +5,8 @@ const favorites = require("./favorites");
 const history = require("./history");
 const wishlist = require("./wishlist");
 
+/* ================= FAVORITES ================= */
+
 router.get("/favorites", (req, res) => {
     res.json(favorites.getAll());
 });
@@ -19,9 +21,19 @@ router.delete("/favorites/:id", (req, res) => {
     res.json(favorites.remove(req.params.id));
 });
 
+/* ================= HISTORY ================= */
+
 router.get("/history", (req, res) => {
     res.json(history.getAll());
 });
+
+router.post("/history", (req, res) => {
+    const item = history.add(req.body);
+    if (!item) return res.status(400).json({ error: "country required" });
+    res.status(201).json(item);
+});
+
+/* ================= WISHLIST ================= */
 
 router.get("/wishlist", (req, res) => {
     res.json(wishlist.getAll());
