@@ -3,7 +3,15 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: "https://repositoriofavorito.vercel.app",
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type"]
+}));
+
+// 👇 ESTO ES LO QUE TE FALTA
+app.options("*", cors());
+
 app.use(express.json());
 
 const apiRoutes = require("./api/main");
