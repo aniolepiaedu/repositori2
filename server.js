@@ -3,19 +3,19 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors({
+const corsOptions = {
     origin: "https://repositoriofavorito.vercel.app",
     methods: ["GET", "POST", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type"]
-}));
+};
 
-// 👇 ESTO ES LO QUE TE FALTA
-app.options("*", cors());
+// ✔ usar MISMO corsOptions en todo
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
 const apiRoutes = require("./api/main");
-
 app.use("/api", apiRoutes);
 
 app.get("/", (req, res) => {
