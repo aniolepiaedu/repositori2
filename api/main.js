@@ -1,9 +1,23 @@
 const express = require("express");
 const router = express.Router();
+const cors = require("cors");
 
 const favorites = require("./favorites");
 const history = require("./history");
 const wishlist = require("./wishlist");
+
+
+const corsOptions = {
+    origin: "https://repositoriofavorito.vercel.app",
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type"]
+};
+
+router.use(cors(corsOptions));
+
+// 👇 CLAVE: manejar preflight dentro del router
+router.options("*", cors(corsOptions));
+
 
 /* ===================== FAVORITES ===================== */
 
