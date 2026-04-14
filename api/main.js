@@ -1,23 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const cors = require("cors");
 
 const favorites = require("./favorites");
 const history = require("./history");
 const wishlist = require("./wishlist");
-
-
-const corsOptions = {
-    origin: "https://repositoriofavorito.vercel.app",
-    methods: ["GET", "POST", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type"]
-};
-
-router.use(cors(corsOptions));
-
-// 👇 CLAVE: manejar preflight dentro del router
-router.options("*", cors(corsOptions));
-
 
 /* ===================== FAVORITES ===================== */
 
@@ -46,16 +32,6 @@ router.get("/history", (req, res) => {
     res.json(history.getAll());
 });
 
-router.post("/wishlist", (req, res) => {
-    const item = wishlist.add(req.body);
-
-    if (!item) {
-        return res.status(400).json({ error: "name required" });
-    }
-
-    res.status(201).json(item);
-});
-
 /* ===================== WISHLIST ===================== */
 
 router.get("/wishlist", (req, res) => {
@@ -64,6 +40,11 @@ router.get("/wishlist", (req, res) => {
 
 router.post("/wishlist", (req, res) => {
     const item = wishlist.add(req.body);
+
+    if (!item) {
+        return res.status(400).json({ error: "name required" });
+    }
+
     res.status(201).json(item);
 });
 
