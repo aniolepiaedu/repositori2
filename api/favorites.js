@@ -6,8 +6,8 @@ function getAll() {
 }
 
 function add(data) {
-    if (!data || !data.name) {
-        return { error: "name required" };
+    if (!data?.name) {
+        return null;
     }
 
     const item = {

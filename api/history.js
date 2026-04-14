@@ -6,8 +6,8 @@ function getAll() {
 }
 
 function add(data) {
-    if (!data || !data.country) {
-        return { error: "country required" };
+    if (!data?.country) {
+        return null;
     }
 
     const item = {

@@ -13,6 +13,11 @@ router.get("/favorites", (req, res) => {
 
 router.post("/favorites", (req, res) => {
     const item = favorites.add(req.body);
+
+    if (!item) {
+        return res.status(400).json({ error: "name required" });
+    }
+
     res.status(201).json(item);
 });
 
@@ -27,8 +32,13 @@ router.get("/history", (req, res) => {
     res.json(history.getAll());
 });
 
-router.post("/history", (req, res) => {
-    const item = history.add(req.body);
+router.post("/wishlist", (req, res) => {
+    const item = wishlist.add(req.body);
+
+    if (!item) {
+        return res.status(400).json({ error: "name required" });
+    }
+
     res.status(201).json(item);
 });
 
